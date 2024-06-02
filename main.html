@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta tags for character set and viewport -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+
+<body>
+    <!-- Header section -->
+    <header aria-label="Top Header">
+        <div class="container">
+            <!-- Main navigation menu -->
+            <nav aria-label="Main Navigation">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+            <!-- Title of the webpage -->
+            <h1>BMI Calculator</h1>
+            <nav aria-label="Secondary Navigation">
+                <ul>
+                    <li><a href="results.html  ">Results</a></li>
+                    <li><a href="tips.html">BMI Wellness Tips</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <div class="container">
+        <!-- Calculator section -->
+        <section id="calculator">
+            <!-- Title for BMI calculator -->
+            <h2>Calculate Your Body Mass Index-BMI</h2>
+            <!-- BMI calculation form -->
+            <form id="bmiForm">
+                <div class="input-group">
+                    <label for="height">Height (cm):</label>
+                    <input type="number" id="height" placeholder="Enter your height in cm" required min="130" max="230">
+                </div>
+                <div class="input-group">
+                    <label for="weight">Weight (kg):</label>
+                    <input type="number" id="weight" placeholder="Enter your weight in kg" required min="40" max="160">
+                </div>
+                <button type="submit">Calculate BMI</button>
+                <button type="button" id="clearBtn">Clear</button>
+                <!-- Display BMI result -->
+                <div class="result">
+                    <h3>Your BMI is</h3>
+                    <div id="result">00.00</div>
+                </div>
+                <!-- Display comment based on BMI -->
+                <div class="comment">
+                    <div id="comment"></div>
+                </div>
+                <div class="commentfromapi">
+                    <div id="commentfromapi"></div>
+                </div>
+                <!-- Button to export BMI as JSON -->
+                <button type="button" id="exportBtn">Export as JSON</button>
+            </form>
+        </section>
+    </div>
+    <!-- Footer section -->
+    <footer>
+        <div class="container">
+            <img src="images/BMI_chart.png" alt="BMI Chart">
+            <p class="footer-text">
+                <a href="https://www.cdc.gov/healthyweight/assessing/bmi/adult_bmi/index.html">
+                    More information on BMI from the CDC</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript file -->
+    <script src="scripts/script.js"></script>
+</body>
+
+</html>
