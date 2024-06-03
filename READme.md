@@ -29,6 +29,6 @@ Push your changes to your fork.
 Submit a pull request, detailing the changes you've made.
 
 Credits
-Khadijat
-Brian
-immanuel 
+Khadijat,
+Brian,
+immanuel, 
