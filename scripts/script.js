@@ -1,7 +1,6 @@
 // Event listener for the clear button
 document.getElementById("clearBtn").addEventListener("click", function () {
   // Clear input fields and result display
-
   document.getElementById("height").value = "";
   document.getElementById("weight").value = "";
   document.getElementById("result").textContent = "00.00";
@@ -12,7 +11,6 @@ document.getElementById("clearBtn").addEventListener("click", function () {
 // Event listener for the export button
 document.getElementById("exportBtn").addEventListener("click", () => {
   // Get BMI data from input fields and result display
-
   const data = {
     height: document.getElementById("height").value,
     weight: document.getElementById("weight").value,
@@ -44,11 +42,9 @@ document.getElementById("exportBtn").addEventListener("click", () => {
 // Event listener for the BMI form submission
 document.getElementById("bmiForm").addEventListener("submit", async (event) => {
   event.preventDefault(); // Prevent default form submission
-  var BMIasWhole;
+
   const bmiUrl = "https://fitness-calculator.p.rapidapi.com/bmi";
-  // Default age for BMI calculation (age does not matter, only for API input)
-  const age = 18;
-  // Get height and weight from input fields
+  const age = 18; // Default age for BMI calculation
   const height = parseFloat(document.getElementById("height").value);
   const weight = parseFloat(document.getElementById("weight").value);
 
@@ -67,38 +63,30 @@ document.getElementById("bmiForm").addEventListener("submit", async (event) => {
     const response = await fetch(bmiUrl + bmiQueryString, bmiOptions);
     const result = await response.json();
     // Display BMI result
-    displayResult(result.data.bmi);
-    BMIasWhole = Math.round(result.data.bmi);
-    console.log(result);
-  } catch (error) {
-    console.error(error);
-  }
+    const bmi = result.data.bmi;
+    displayResult(bmi);
 
-  // Numbers API
-  const url =
-    "https://numbersapi.p.rapidapi.com/" +
-    BMIasWhole +
-    "/math?fragment=true&json=true";
+    const BMIasWhole = Math.round(bmi);
 
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "eddabf6e87msh72195a356d91ab8p176f23jsn891d29facfbe",
-      "X-RapidAPI-Host": "numbersapi.p.rapidapi.com",
-    },
-  };
+    // Numbers API
+    const numbersApiUrl = `https://numbersapi.p.rapidapi.com/${BMIasWhole}/math?fragment=true&json=true`;
+    const numbersApiOptions = {
+      method: "GET",
+      headers: {
+        "X-RapidAPI-Key": "eddabf6e87msh72195a356d91ab8p176f23jsn891d29facfbe",
+        "X-RapidAPI-Host": "numbersapi.p.rapidapi.com",
+      },
+    };
 
-  try {
-    const response = await fetch(url, options);
-    const result = await response.json();
-    console.log(result);
+    const numbersApiResponse = await fetch(numbersApiUrl, numbersApiOptions);
+    const numbersApiResult = await numbersApiResponse.json();
 
     const resultDiv = document.getElementById("comment");
     const resultDivAPI = document.getElementById("commentfromapi");
 
     // Display comment based on NumbersAPI result
-    resultDiv.innerHTML = `We took your decimal BMI and it the whole number, ${BMIasWhole}. According to NumbersAPI™, your number is...</p>`;
-    resultDivAPI.innerHTML = `${result.text}!</p>`;
+    resultDiv.innerHTML = `We took your decimal BMI and the whole number, ${BMIasWhole}. According to NumbersAPI™, your number is...`;
+    resultDivAPI.innerHTML = `${numbersApiResult.text}!`;
   } catch (error) {
     console.error(error);
   }
@@ -126,5 +114,5 @@ function displayResult(bmi) {
   // Display BMI result with color
   resultDiv.innerHTML = `<span style="color: ${color};">${bmi.toFixed(
     2
-  )}</span></p>`;
+  )}</span>`;
 }
